@@ -7,6 +7,7 @@ License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
 
 import bisect
 import copy
+import fractions
 import logging
 import math
 import numpy
@@ -477,7 +478,7 @@ class Pmf(_DictWrapper):
         """
         return 1 - (self == obj)
 
-    def normalize(self, fraction=1.0):
+    def normalize(self, fraction=fractions.Fraction(1)):
         """Normalizes this PMF so the sum of all `prob`s is fraction.
 
         Args:
@@ -493,7 +494,7 @@ class Pmf(_DictWrapper):
             logging.warning('normalize: total probability is zero.')
             raise ValueError('total probability is zero.')
 
-        factor = float(fraction) / total
+        factor = fraction / total
         for x in self.d:
             self.d[x] *= factor
 
