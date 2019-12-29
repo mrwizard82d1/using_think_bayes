@@ -1145,7 +1145,7 @@ class UnimplementedMethodException(Exception):
 class Suite(Pmf):
     """Represents a suite of hypotheses and their probabilities."""
 
-    def Update(self, data):
+    def update(self, data):
         """Updates each hypothesis based on the data.
 
         data: any representation of the data
@@ -1153,29 +1153,29 @@ class Suite(Pmf):
         returns: the normalizing constant
         """
         for hypo in self.values():
-            like = self.Likelihood(data, hypo)
+            like = self.likelihood(data, hypo)
             self.multiply(hypo, like)
         return self.normalize()
 
-    def LogUpdate(self, data):
+    def log_update(self, data):
         """Updates a suite of hypotheses based on new data.
 
         Modifies the suite directly; if you want to keep the original, make
         a copy.
 
-        Note: unlike Update, LogUpdate does not normalize.
+        Note: unlike update, log_update does not normalize.
 
         Args:
             data: any representation of the data
         """
         for hypo in self.values():
-            like = self.LogLikelihood(data, hypo)
+            like = self.log_likelihood(data, hypo)
             self.increment(hypo, like)
 
-    def UpdateSet(self, dataset):
+    def update_set(self, dataset):
         """Updates each hypothesis based on the dataset.
 
-        This is more efficient than calling Update repeatedly because
+        This is more efficient than calling update repeatedly because
         it waits until the end to normalize.
 
         Modifies the suite directly; if you want to keep the original, make
@@ -1187,11 +1187,11 @@ class Suite(Pmf):
         """
         for data in dataset:
             for hypo in self.values():
-                like = self.Likelihood(data, hypo)
+                like = self.likelihood(data, hypo)
                 self.multiply(hypo, like)
         return self.normalize()
 
-    def LogUpdateSet(self, dataset):
+    def log_update_ste(self, dataset):
         """Updates each hypothesis based on the dataset.
 
         Modifies the suite directly; if you want to keep the original, make
@@ -1202,9 +1202,9 @@ class Suite(Pmf):
         returns: None
         """
         for data in dataset:
-            self.LogUpdate(data)
+            self.log_update(data)
 
-    def Likelihood(self, data, hypo):
+    def likelihood(self, data, hypo):
         """Computes the likelihood of the data under the hypothesis.
 
         hypo: some representation of the hypothesis
@@ -1212,7 +1212,7 @@ class Suite(Pmf):
         """
         raise UnimplementedMethodException()
 
-    def LogLikelihood(self, data, hypo):
+    def log_likelihood(self, data, hypo):
         """Computes the log likelihood of the data under the hypothesis.
 
         hypo: some representation of the hypothesis
@@ -1225,7 +1225,7 @@ class Suite(Pmf):
         for hypo, prob in sorted(self.items()):
             print(hypo, prob)
 
-    def MakeOdds(self):
+    def make_odds(self):
         """Transforms from probabilities to odds.
 
         Values with prob=0 are removed.
@@ -1236,7 +1236,7 @@ class Suite(Pmf):
             else:
                 self.remove(hypo)
 
-    def MakeProbs(self):
+    def make_probabilities(self):
         """Transforms from odds to probabilities."""
         for hypo, odds in self.items():
             self.set(hypo, Probability(odds))

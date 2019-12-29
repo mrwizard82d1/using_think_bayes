@@ -1,1 +1,1 @@
-from .thinkbayes import Pmf
+from .thinkbayes import Pmf, Suite
