@@ -196,7 +196,7 @@ def Plot(obj, ys=None, style='', **options):
     """Plots a line.
 
     Args:
-      obj: sequence of x values, or Series, or anything with Render()
+      obj: sequence of x values, or Series, or anything with render()
       ys: sequence of y values
       style: style string passed along to pyplot.plot
       options: keyword args passed to pyplot.plot
@@ -207,8 +207,8 @@ def Plot(obj, ys=None, style='', **options):
 
     xs = obj
     if ys is None:
-        if hasattr(obj, 'Render'):
-            xs, ys = obj.Render()
+        if hasattr(obj, 'render'):
+            xs, ys = obj.render()
         if isinstance(obj, pandas.Series):
             ys = obj.values
             xs = obj.index
@@ -284,7 +284,7 @@ def Pdf(pdf, **options):
     """
     low, high = options.pop('low', None), options.pop('high', None)
     n = options.pop('n', 101)
-    xs, ps = pdf.Render(low=low, high=high, n=n)
+    xs, ps = pdf.render(low=low, high=high, n=n)
     options = _Underride(options, label=pdf.name)
     Plot(xs, ps, **options)
 
@@ -316,7 +316,7 @@ def Hist(hist, **options):
       options: keyword args passed to pyplot.bar
     """
     # find the minimum distance between adjacent values
-    xs, ys = hist.Render()
+    xs, ys = hist.render()
 
     if 'width' not in options:
         try:
@@ -359,7 +359,7 @@ def Pmf(pmf, **options):
       pmf: Hist or Pmf object
       options: keyword args passed to pyplot.plot
     """
-    xs, ys = pmf.Render()
+    xs, ys = pmf.render()
     low, high = min(xs), max(xs)
 
     width = options.pop('width', None)
@@ -438,7 +438,7 @@ def Cdf(cdf, complement=False, transform=None, **options):
       dictionary with the scale options that should be passed to
       Config, Show or Save.
     """
-    xs, ps = cdf.Render()
+    xs, ps = cdf.render()
     xs = np.asarray(xs)
     ps = np.asarray(ps)
 
@@ -493,14 +493,14 @@ def Cdfs(cdfs, complement=False, transform=None, **options):
 def Contour(obj, pcolor=False, contour=True, imshow=False, **options):
     """Makes a contour plot.
     
-    d: map from (x, y) to z, or object that provides GetDict
+    d: map from (x, y) to z, or object that provides get_dict
     pcolor: boolean, whether to make a pseudocolor plot
     contour: boolean, whether to make a contour plot
     imshow: boolean, whether to use pyplot.imshow
     options: keyword args passed to pyplot.pcolor and/or pyplot.contour
     """
     try:
-        d = obj.GetDict()
+        d = obj.get_dict()
     except AttributeError:
         d = obj
 
