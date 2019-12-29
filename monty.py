@@ -34,12 +34,12 @@ class Monty(Pmf):
 
         self.normalize()
 
-    def likelihood(self, hypothesis, data):
+    def likelihood(self, data, hypothesis):
         """Calculate the likelihood of observing data given hypothesis is true.
 
         Args:
-            hypothesis (object): The hypothesis assumed to be true.
             data (object): The observed datum.
+            hypothesis (object): The hypothesis assumed to be true.
         """
 
         if hypothesis == data:

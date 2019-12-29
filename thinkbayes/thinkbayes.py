@@ -145,7 +145,7 @@ class _DictWrapper(object):
                 continue
 
         if len(self) > 0:
-            self.Normalize()
+            self.normalize()
 
     def init_sequence(self, values):
         """Initializes with a sequence of equally-likely values.
@@ -1204,18 +1204,18 @@ class Suite(Pmf):
         for data in dataset:
             self.log_update(data)
 
-    def likelihood(self, data, hypo):
+    def likelihood(self, data, hypothesis):
         """Computes the likelihood of the data under the hypothesis.
 
-        hypo: some representation of the hypothesis
+        hypothesis: some representation of the hypothesis
         data: some representation of the data
         """
         raise UnimplementedMethodException()
 
-    def log_likelihood(self, data, hypo):
+    def log_likelihood(self, data, hypothesis):
         """Computes the log likelihood of the data under the hypothesis.
 
-        hypo: some representation of the hypothesis
+        hypothesis: some representation of the hypothesis
         data: some representation of the data
         """
         raise UnimplementedMethodException()
