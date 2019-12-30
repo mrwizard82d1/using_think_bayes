@@ -13,17 +13,17 @@ import numpy as np
 import pandas
 
 # customize some matplotlib attributes
-#matplotlib.rc('figure', figsize=(4, 3))
+# matplotlib.rc('figure', figsize=(4, 3))
 
-#matplotlib.rc('font', size=14.0)
-#matplotlib.rc('axes', labelsize=22.0, titlesize=22.0)
-#matplotlib.rc('legend', fontsize=20.0)
+# matplotlib.rc('font', size=14.0)
+# matplotlib.rc('axes', labelsize=22.0, titlesize=22.0)
+# matplotlib.rc('legend', fontsize=20.0)
 
-#matplotlib.rc('xtick.major', size=6.0)
-#matplotlib.rc('xtick.minor', size=3.0)
+# matplotlib.rc('xtick.major', size=6.0)
+# matplotlib.rc('xtick.minor', size=3.0)
 
-#matplotlib.rc('ytick.major', size=6.0)
-#matplotlib.rc('ytick.minor', size=3.0)
+# matplotlib.rc('ytick.major', size=6.0)
+# matplotlib.rc('ytick.minor', size=3.0)
 
 
 class _Brewer(object):
@@ -466,7 +466,7 @@ def Cdf(cdf, complement=False, transform=None, **options):
         scale['yscale'] = 'log'
 
     if transform == 'gumbel':
-        xs = xp.delete(xs, 0)
+        xs = np.delete(xs, 0)
         ps = np.delete(ps, 0)
         ps = [-math.log(p) for p in ps]
         scale['yscale'] = 'log'
