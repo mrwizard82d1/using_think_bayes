@@ -677,7 +677,7 @@ def SaveFormat(root, fmt='eps'):
 # provide aliases for calling functions with lower-case names
 preplot = PrePlot
 subplot = SubPlot
-clf = Clf
+clear_figures = Clf
 figure = Figure
 plot = Plot
 scatter = Scatter

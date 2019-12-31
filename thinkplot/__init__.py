@@ -1,1 +1,1 @@
-from .thinkplot import preplot, plot_pmf, save
+from .thinkplot import clear_figures, preplot, plot_pmf, save
