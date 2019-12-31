@@ -370,20 +370,20 @@ def Pmf(pmf, **options):
                             "Or try providing width option.")
     points = []
 
-    lastx = np.nan
-    lasty = 0
+    last_x = np.nan
+    last_y = 0
     for x, y in zip(xs, ys):
-        if (x - lastx) > 1e-5:
-            points.append((lastx, 0))
+        if (x - last_x) > 1e-5:
+            points.append((last_x, 0))
             points.append((x, 0))
 
-        points.append((x, lasty))
+        points.append((x, last_y))
         points.append((x, y))
         points.append((x+width, y))
 
-        lastx = x + width
-        lasty = y
-    points.append((lastx, 0))
+        last_x = x + width
+        last_y = y
+    points.append((last_x, 0))
     pxs, pys = zip(*points)
 
     align = options.pop('align', 'center')
@@ -594,10 +594,12 @@ def Config(**options):
                 }
 
     loc = options.get('loc', 0)
-    #loc = loc_dict.get(loc, loc)
+    # loc = loc_dict.get(loc, loc)
 
+    ax = pyplot.gca()
+    _handles, labels = ax.get_legend_handles_labels()
     legend = options.get('legend', True)
-    if legend:
+    if legend and len(labels) > 0:
         pyplot.legend(loc=loc)
 
 
@@ -672,15 +674,15 @@ def SaveFormat(root, fmt='eps'):
     pyplot.savefig(filename, format=fmt, dpi=300)
 
 
-# provide aliases for calling functons with lower-case names
+# provide aliases for calling functions with lower-case names
 preplot = PrePlot
 subplot = SubPlot
 clf = Clf
 figure = Figure
 plot = Plot
 scatter = Scatter
-pmf = Pmf
-pmfs = Pmfs
+plot_pmf = Pmf
+plot_pmfs = Pmfs
 hist = Hist
 hists = Hists
 diff = Diff
