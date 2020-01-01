@@ -55,11 +55,25 @@ def compare_priors():
         suite.name = label
         thinkplot.plot_pmf(suite)
 
-    thinkplot.save(root='train4', xlabel='Number of trains', ylabel='Probability', formats=['png'])
+    thinkplot.save(root='train4', xlabel='Number of trains', ylabel='Probability')
 
 
 def main():
+    # Compare posteriors resulting from uniform and power law priors.
     compare_priors()
+
+    # Compare results of power law prior for different numbers of hypotheses
+    dataset = [30, 60, 90]
+
+    thinkplot.clear_figures()
+    thinkplot.preplot(3)
+
+    suites = [make_posterior(high, dataset, Train2) for high in [500, 1000, 2000]]
+    for suite in suites:
+        thinkplot.plot_pmf(suite)
+        print(suite.name, round(suite.mean()))
+
+    thinkplot.save(root='train3', xlabel='Number of locomotives', ylabel='Probability')
 
 
 if __name__ == '__main__':
