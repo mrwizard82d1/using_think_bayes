@@ -3,7 +3,7 @@
 
 import math
 
-from thinkbayes import percentile
+from thinkbayes import percentile, make_cdf_from_pmf
 import thinkplot
 
 from dice import Dice
@@ -77,6 +77,10 @@ def main():
     thinkplot.save(root='train3', xlabel='Number of locomotives', ylabel='Probability')
 
     interval = percentile(suites[-1], 5), percentile(suites[-1], 95)
+    print(interval)
+
+    cdf = make_cdf_from_pmf(suites[-1])
+    interval = cdf.percentile(5), cdf.percentile(95)
     print(interval)
 
 
