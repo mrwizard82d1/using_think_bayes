@@ -3,6 +3,7 @@
 
 import math
 
+from thinkbayes import percentile
 import thinkplot
 
 from dice import Dice
@@ -74,6 +75,9 @@ def main():
         print(suite.name, round(suite.mean()))
 
     thinkplot.save(root='train3', xlabel='Number of locomotives', ylabel='Probability')
+
+    interval = percentile(suites[-1], 5), percentile(suites[-1], 95)
+    print(interval)
 
 
 if __name__ == '__main__':

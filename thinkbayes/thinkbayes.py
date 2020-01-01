@@ -1381,7 +1381,7 @@ class EstimatedPdf(Pdf):
         return pmf
 
 
-def Percentile(pmf, percentage):
+def percentile(pmf, percentage):
     """Computes a percentile of a given Pmf.
 
     percentage: float 0-100

@@ -1,1 +1,1 @@
-from .thinkbayes import Pmf, Suite
+from .thinkbayes import Pmf, Suite, percentile
