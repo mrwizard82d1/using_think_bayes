@@ -647,7 +647,7 @@ def Save(root=None, formats=None, **options):
     Config(**options)
 
     if formats is None:
-        formats = ['pdf', 'eps']
+        formats = ['png']
 
     try:
         formats.remove('plotly')
